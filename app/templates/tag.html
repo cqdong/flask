@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <h2 class="page-header">Tag</h2>
+    {% for post in posts %}
+        <div><a href="{{ url_for('main.tag_list', id=post.id) }}">{{ post.tag }}</a></div>
+    {% endfor %}
+{% endblock %}

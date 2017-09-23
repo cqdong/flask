@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}{{ posts.title}}{% endblock %}
+
+{% block page_content %}
+    <div class="post-detail">
+        <article>
+            <header>
+                <h2 class="text-center">{{ posts.title }}</h2>
+                <div class="post-detail-meta">
+                    <span>
+                        <i class="iconfont icon-43" style="font-size: inherit"></i>
+                        发表于 {{ posts.timestamp }}
+                    </span>
+                    <span>|</span>
+                    <span>
+                        <i class="iconfont icon-folder" style="font-size: inherit;"></i>
+                        分类于 {{ posts.post_classify.classify }}
+                    </span>
+                    <span>|</span>
+                    <span>
+                        <i class="iconfont icon-browse" style="font-size: inherit"></i>
+                        阅读次数 {{ posts.view }}
+                    </span>
+                    {% if current_user.is_authenticated %}
+                        {% if current_user == posts.author or current_user.can(Permission.ADMINISTER) %}
+                            <span>
+                                <i class="iconfont icon-edit" style="font-size: inherit"></i>
+                                <a href="{{ url_for('main.post_edit', id=posts.id) }}">编辑文章</a>
+                            </span>
+                        {% endif %}
+                    {% endif %}
+                </div>
+
+            </header>
+            <div class="post-detail-body">
+                {{ posts.body_html|safe }}
+            </div>
+            <footer>
+
+            </footer>
+        </article>
+    </div>
+{% endblock %}

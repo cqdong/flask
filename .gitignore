@@ -1,0 +1,5 @@
+*.py[cod]
+Desktop.ini
+.idea
+__pycache__
+.env

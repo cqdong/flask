@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Post-New{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editormd.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block page_content %}
+    <form class="form" method="post" role="form">
+        {{ forms.hidden_tag() }}
+        {{ wtf.form_field(forms.title) }}
+        {{ wtf.form_field(forms.classify) }}
+        <div id="test-editormd" class="form-control">
+            {{ forms.body(class="form-control", style="display:none;") }}
+        </div>
+        {{ wtf.form_field(forms.tag, class="form-control basic-multiple", multiple="multiple", style="width:100%") }}
+        {{ forms.submit() }}
+    </form>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="{{ url_for('static', filename='js/editormd.min.js') }}"></script>
+<script>
+    var testEditor;
+    $(function(){
+        editormd.emoji.path = "http://www.webpagefx.com/tools/emoji-cheat-sheet/graphics/emojis/";
+        testEditor=editormd("test-editormd",{
+            emoji: true,
+            width: "100%",
+            //autoHeight: true,
+            height: "80vh",
+            syncScrolling : "single",
+            path: "{{ url_for('static',filename='editormd/lib/') }}",
+            toolbarIcons : function() {
+                return ["undo", "redo", "|", "hr", "bold", "del", "italic", "quote", "ucwords", "uppercase",
+                    "lowercase", "|", "h1", "h2", "h3", "h4", "|", "list-ul", "list-ol", "|", "link",
+                    "reference-link", "image", "|", "code", "preformatted-text", "code-block", "|", "table",
+                    "datetime", "html-entities", "watch", "clear", "search", "help"
+
+                ]
+            },
+            //启动本地图片上传功能
+            imageUpload    : true,
+            imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL : "{{url_for('main.upload')}}"
+        });
+    });
+    $(".basic-multiple").select2();
+</script>
+
+{% endblock %}

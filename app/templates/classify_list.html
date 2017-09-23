@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<h2 class="page-header">{{ posts[0].post_classify.classify }}</h2>
+    {% for post in posts %}
+        <div>
+            <span>{{ moment(post.timestamp).format("MMMDo") }}</span>
+            <span><a href="{{ url_for('main.post_detail', id=post.id) }}">{{ post.title }}</a></span>
+        </div>
+    {% endfor%}
+{% endblock%}
