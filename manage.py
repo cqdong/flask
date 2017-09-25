@@ -19,10 +19,11 @@ if os.path.exists(path_env):
         config.ProductionConfig.SQLALCHEMY_DATABASE_URI = os.environ.get('PRO_DATABASE_URL')
         config.Config.SECRET_KEY = os.environ.get('SECRET_KEY')
 
+
 app = create_app(os.environ.get('FLASK_CONFIG'))
 
 manager = Manager(app)
-migrate = Migrate(app)
+migrate = Migrate(app, db)
 
 def make_shell_context():
     return dict(app=app, db=db)
