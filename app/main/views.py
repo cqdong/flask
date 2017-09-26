@@ -22,3 +22,9 @@ def post_new():
         db.session.add(post)
         return redirect(url_for('.index'))
     return render_template('post_new.html', forms=form)
+
+@main.route('/post_detail/<int:id>')
+def post_detail(id):
+    post = Post.query.get_or_404(id)
+    post.views()
+    return render_template('post_detail.html', posts=post)
