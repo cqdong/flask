@@ -18,6 +18,8 @@ class DevelopmentConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('PRO_DATABASE_URL')
+    SQLALCHEMY_POOL_RECYCLE = 499
+    SQLALCHEMY_POOL_TIMEOUT = 20
 
 class TestConfig(Config):
     pass
