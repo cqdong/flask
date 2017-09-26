@@ -3,7 +3,7 @@ from datetime import datetime
 from . import db
 from markdown import markdown
 import bleach
-from bs4 import BeautifulStoneSoup as bs
+from bs4 import BeautifulSoup as bs
 
 class Post(db.Model):
     __tablename__ = 'posts'
@@ -51,9 +51,11 @@ class Post(db.Model):
                     num += 1
         target.body_digest = bs(abstract, 'html.parser').prettify()
 
-        def views(self):
-            self.view += 1
-            db.session.add(self)
+    def views(self):
+        self.view += 1
+        db.session.add(self)
 
-        def __repr__(self):
-            return '<POST %r>' %self.title
+    def __repr__(self):
+        return '<POST %r>' %self.title
+
+db.event.listen(Post.body, 'set', Post.on_changed_body)

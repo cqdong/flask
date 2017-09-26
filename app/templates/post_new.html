@@ -12,11 +12,11 @@
     <form class="form" method="post" role="form">
         {{ forms.hidden_tag() }}
         {{ wtf.form_field(forms.title) }}
-        {{ wtf.form_field(forms.classify) }}
+{#        {{ wtf.form_field(forms.classify) }}#}
         <div id="test-editormd" class="form-control">
             {{ forms.body(class="form-control", style="display:none;") }}
         </div>
-        {{ wtf.form_field(forms.tag, class="form-control basic-multiple", multiple="multiple", style="width:100%") }}
+{#        {{ wtf.form_field(forms.tag, class="form-control basic-multiple", multiple="multiple", style="width:100%") }}#}
         {{ forms.submit() }}
     </form>
 {% endblock %}
@@ -47,7 +47,7 @@
             //启动本地图片上传功能
             imageUpload    : true,
             imageFormats   : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL : "{{url_for('main.upload')}}"
+{#            imageUploadURL : "{{url_for('main.upload')}}"#}
         });
     });
     $(".basic-multiple").select2();

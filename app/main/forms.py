@@ -4,8 +4,8 @@ from wtforms.validators import data_required
 
 class PostForm(FlaskForm):
     title = StringField('标题', validators=[data_required()])
-    classify = SelectField('分类', coerce=int)
-    tag = SelectMultipleField('标签', coerce=int)
+    # classify = SelectField('分类', coerce=int)
+    # tag = SelectMultipleField('标签', coerce=int)
     body = TextAreaField('文章', validators=[data_required()])
     submit = SubmitField('提交')
 

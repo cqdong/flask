@@ -14,26 +14,29 @@
             <article>
                 <header>
                     <h2 class="post-title">
-                        <!--<a href="{{ url_for('.post_detail', id=post.id) }}"><i class="iconfont icon-form" style="font-size: inherit"></i> {{ post.title }}</a>-->
-                        <a href="{{ url_for('.post_detail', id=post.id) }}">{{ post.title }}</a>
+{#                        <!--<a href="{{ url_for('.post_detail', id=post.id) }}"><i class="iconfont icon-form" style="font-size: inherit"></i> {{ post.title }}</a>-->#}
+{#                        <a href="{{ url_for('.post_detail', id=post.id) }}">{{ post.title }}</a>#}
+                        {{ post.title }}
                     </h2>
                 </header>
-                <div class="post-meta">
-                    <div class="post-time">{{ moment(post.timestamp).format("MMM D,YYYY")}}</div>
-                    <!--<div class="post-time"><i class="iconfont icon-calendar" style="font-size: inherit"></i> {{ moment(post.timestamp).format("MMM D,YYYY")}}</div>-->
-                    <!--<div><i class="iconfont icon-100"></i></div>-->
-                    <div class="post-classify">{{ post.post_classify.classify }}</div>
+{#                <div class="post-meta">#}
+{#                    <div class="post-time">{{ moment(post.timestamp).format("MMM D,YYYY")}}</div>#}
+{#                    <!--<div class="post-time"><i class="iconfont icon-calendar" style="font-size: inherit"></i> {{ moment(post.timestamp).format("MMM D,YYYY")}}</div>-->#}
+{#                    <!--<div><i class="iconfont icon-100"></i></div>-->#}
+{#                    <div class="post-classify">{{ post.post_classify.classify }}</div>#}
                     <div class="post-body">{{ post.body_digest|safe }}</div>
-                </div>
-                <footer>
-                    <a href="{{ url_for('main.post_detail', id=post.id) }}">阅读全文></a>
-                </footer>
+{#                </div>#}
+{#                <footer>#}
+{#                    <a href="{{ url_for('main.post_detail', id=post.id) }}">阅读全文></a>#}
+{#                </footer>#}
             </article>
         {% endfor %}
     </section>
     <div class="pagination">
         {{ macros.pagination_widget(pagination, 'main.index') }}
     </div>
-    {{ moment(utctime).fromNow(refresh=True) }}
-    {{ moment().format('LLL')}}
+    <div>
+        {{ moment(utctime).fromNow(refresh=True) }}
+        {{ moment().format('LLL')}}
+    </div>
 {% endblock %}
