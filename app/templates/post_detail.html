@@ -25,8 +25,8 @@
 {#                    {% if current_user.is_authenticated %}#}
 {#                        {% if current_user == posts.author or current_user.can(Permission.ADMINISTER) %}#}
 {#                            <span>#}
-{#                                <i class="iconfont icon-edit" style="font-size: inherit"></i>#}
-{#                                <a href="{{ url_for('main.post_edit', id=posts.id) }}">编辑文章</a>#}
+                                <i class="iconfont icon-edit" style="font-size: inherit"></i>
+                                <a href="{{ url_for('main.post_edit', id=posts.id) }}">编辑文章</a>
 {#                            </span>#}
 {#                        {% endif %}#}
 {#                    {% endif %}#}

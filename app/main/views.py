@@ -28,3 +28,16 @@ def post_detail(id):
     post = Post.query.get_or_404(id)
     post.views()
     return render_template('post_detail.html', posts=post)
+
+@main.route('/post_edit/<int:id>', methods=['GET', 'POST'])
+def post_edit(id):
+    post = Post.query.get_or_404(id)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.body = form.body.data
+        db.session.add(post)
+        return redirect(url_for('.post_detail', id=post.id))
+    form.title.data = post.title
+    form.body.data = post.body
+    return render_template('post_new.html', forms=form)
