@@ -67,3 +67,13 @@ def image(name):
     with open(os.path.join(current_app.static_folder, 'img', name), 'rb') as f:
         resp = Response(f.read(), mimetype='image/jpeg')
     return resp
+
+@main.route('/archive')
+def archive():
+    post = []
+    years = db.session.query(extract('year', Post.timestamp).label('year'),
+                             func.count('*').label('year_count')).group_by('year').order_by(desc('year')).all()
+    for y in years:
+        post.append([y[0], db.session.query(Post).filter(extract('year', Post.timestamp) == y[0]).order_by(
+            desc(Post.timestamp)).all()])
+    return render_template('archive.html', posts=post)
