@@ -54,8 +54,7 @@ def upload():
     else:
         ex = os.path.splitext(file.filename)[1]
         filename = datetime.now().strftime('%Y%m%d%H%M%S') + ex
-        # file.save(os.path.join(current_app.static_folder, 'img', filename))
-        file.save(os.path.join(r'C:\Users\c_qdo\PycharmProjects\flask\app\static\img', filename))
+        file.save(os.path.join(current_app.static_folder, 'img', filename))
         res = {
             'success': 1,
             'massage': '图片上传成功',
@@ -65,7 +64,6 @@ def upload():
 
 @main.route('/image/<name>')
 def image(name):
-    # with open(os.path.join(current_app.static_folder, 'img', name), 'rb') as f:
-    with open(os.path.join(r'C:\Users\c_qdo\PycharmProjects\flask\app\static\img', name), 'rb') as f:
+    with open(os.path.join(current_app.static_folder, 'img', name), 'rb') as f:
         resp = Response(f.read(), mimetype='image/jpeg')
     return resp
