@@ -1,10 +1,11 @@
 from . import main
 from app import db
-from flask import render_template, redirect, url_for, request, flash
+from flask import render_template, redirect, url_for, request, flash, current_app, jsonify, Response
 from datetime import datetime
 from ..models import Post
 from sqlalchemy import extract, func, desc
 from .forms import PostForm
+import os
 
 @main.route('/')
 def index():
@@ -41,3 +42,30 @@ def post_edit(id):
     form.title.data = post.title
     form.body.data = post.body
     return render_template('post_new.html', forms=form)
+
+@main.route('/upload/', methods=['POST'])
+def upload():
+    file = request.files.get('editormd-image-file')
+    if not file:
+        res = {
+            'success': 0,
+            'massage': '图片格式异常'
+        }
+    else:
+        ex = os.path.splitext(file.filename)[1]
+        filename = datetime.now().strftime('%Y%m%d%H%M%S') + ex
+        # file.save(os.path.join(current_app.static_folder, 'img', filename))
+        file.save(os.path.join(r'C:\Users\c_qdo\PycharmProjects\flask\app\static\img', filename))
+        res = {
+            'success': 1,
+            'massage': '图片上传成功',
+            'url': url_for('.image', name=filename)
+        }
+    return jsonify(res)
+
+@main.route('/image/<name>')
+def image(name):
+    # with open(os.path.join(current_app.static_folder, 'img', name), 'rb') as f:
+    with open(os.path.join(r'C:\Users\c_qdo\PycharmProjects\flask\app\static\img', name), 'rb') as f:
+        resp = Response(f.read(), mimetype='image/jpeg')
+    return resp
