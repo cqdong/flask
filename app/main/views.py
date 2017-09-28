@@ -80,3 +80,8 @@ def archive():
         post.append([y[0], db.session.query(Post).filter(extract('year', Post.timestamp) == y[0]).order_by(
             desc(Post.timestamp)).all()])
     return render_template('archive.html', posts=post)
+
+@main.route('/classify')
+def classify():
+    post = Classify.query.all()
+    return render_template('classify.html', posts=post)
