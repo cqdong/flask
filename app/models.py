@@ -14,10 +14,11 @@ class Post(db.Model):
     body_digest = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     view = db.Column(db.Integer, default=0)
+    classify_id = db.Column(db.Integer, db.ForeignKey('classifys.id'))
 
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiatior):
-        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'code',
+        allowed_tags = ['a', 'abbr', 'acronym', 'b', 'blockquote', 'br', 'code',
                         'em', 'i', 'li', 'ol', 'pre', 'strong', 'ul',
                         'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'p', 'img']
         attr = {
@@ -57,5 +58,14 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<POST %r>' %self.title
+
+class Classify(db.Model):
+    __tablename__ = 'classifys'
+    id = db.Column(db.Integer, primary_key=True)
+    classify = db.Column(db.String(64), unique=True)
+    posts = db.relationship('Post', backref='post_classify', lazy='dynamic')
+
+    def __repr__(self):
+        return "<CLASSIFY %r>"%self.classify
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)

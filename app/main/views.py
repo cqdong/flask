@@ -2,7 +2,7 @@ from . import main
 from app import db
 from flask import render_template, redirect, url_for, request, flash, current_app, jsonify, Response
 from datetime import datetime
-from ..models import Post
+from ..models import Post, Classify
 from sqlalchemy import extract, func, desc
 from .forms import PostForm
 import os
@@ -37,8 +37,11 @@ def post_edit(id):
     if form.validate_on_submit():
         post.title = form.title.data
         post.body = form.body.data
+        post.post_classify = Classify.query.get(form.classify.data)
         db.session.add(post)
         return redirect(url_for('.post_detail', id=post.id))
+    form.classify.default = post.classify_id
+    form.process()
     form.title.data = post.title
     form.body.data = post.body
     return render_template('post_new.html', forms=form)

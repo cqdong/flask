@@ -12,7 +12,7 @@
     <form class="form" method="post" role="form">
         {{ forms.hidden_tag() }}
         {{ wtf.form_field(forms.title) }}
-{#        {{ wtf.form_field(forms.classify) }}#}
+        {{ wtf.form_field(forms.classify) }}
         <div id="test-editormd" class="form-control">
             {{ forms.body(class="form-control", style="display:none;") }}
         </div>

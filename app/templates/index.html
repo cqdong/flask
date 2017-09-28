@@ -18,16 +18,16 @@
                         <a href="{{ url_for('.post_detail', id=post.id) }}">{{ post.title }}</a>
                     </h2>
                 </header>
-{#                <div class="post-meta">#}
-{#                    <div class="post-time">{{ moment(post.timestamp).format("MMM D,YYYY")}}</div>#}
+                <div class="post-meta">
+                    <div class="post-time">{{ moment(post.timestamp).format("MMM D,YYYY")}}</div>
 {#                    <!--<div class="post-time"><i class="iconfont icon-calendar" style="font-size: inherit"></i> {{ moment(post.timestamp).format("MMM D,YYYY")}}</div>-->#}
 {#                    <!--<div><i class="iconfont icon-100"></i></div>-->#}
-{#                    <div class="post-classify">{{ post.post_classify.classify }}</div>#}
+                    <div class="post-classify">{{ post.post_classify.classify }}</div>
                     <div class="post-body">{{ post.body_digest|safe }}</div>
-{#                </div>#}
-{#                <footer>#}
+                </div>
+                <footer>
                     <a href="{{ url_for('main.post_detail', id=post.id) }}">阅读全文></a>
-{#                </footer>#}
+                </footer>
             </article>
         {% endfor %}
     </section>
