@@ -85,3 +85,8 @@ def archive():
 def classify():
     post = Classify.query.all()
     return render_template('classify.html', posts=post)
+
+@main.route('/classify/<int:id>')
+def classify_list(id):
+    post = Classify.query.get_or_404(id).posts.order_by(Post.timestamp.desc()).all()
+    return render_template('classify_list.html', posts=post)
