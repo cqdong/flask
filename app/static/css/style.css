@@ -26,6 +26,14 @@ main {
     padding-bottom: 20px;
 }
 
+.post-new-main {
+    background-color: #ffffff;
+    padding-top: 50px;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-bottom: 20px;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Roboto Mono','Monda',"PingFang SC","Microsoft YaHei",sans-serif;
 }

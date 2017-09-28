@@ -4,7 +4,9 @@
     <h2 class="page-header">分类</h2>
     {% for post in posts %}
         <div>
-            <a href="{{ url_for('main.classify_list', id=post.id) }}">{{ post.classify }}</a> [{{ post.posts.count() }}]
+            <a href="{% if post.posts.count() == 0 %}#{% else %}{{ url_for('main.classify_list', id=post.id) }}{% endif %}">
+                {{ post.classify }}
+            </a> [{{ post.posts.count() }}]
         </div>
     {% endfor %}
 {% endblock%}
