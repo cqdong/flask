@@ -2,7 +2,7 @@ from . import main
 from app import db
 from flask import render_template, redirect, url_for, request, flash, current_app, jsonify, Response
 from datetime import datetime
-from ..models import Post, Classify
+from ..models import Post, Classify, Tag
 from sqlalchemy import extract, func, desc
 from .forms import PostForm
 import os
@@ -38,8 +38,18 @@ def post_edit(id):
         post.title = form.title.data
         post.body = form.body.data
         post.post_classify = Classify.query.get(form.classify.data)
+        tags = []
+        for t in form.tag.data:
+            tags.append(Tag.query.get(t))
+        post.post_tag = tags
         db.session.add(post)
         return redirect(url_for('.post_detail', id=post.id))
+    post_tags = []
+    tag_temp = post.post_tag.all()
+    # if tag_temp:
+    for t in tag_temp:
+        post_tags.append(t.id)
+    form.tag.default = post_tags
     form.classify.default = post.classify_id
     form.process()
     form.title.data = post.title
@@ -90,3 +100,13 @@ def classify():
 def classify_list(id):
     post = Classify.query.get_or_404(id).posts.order_by(Post.timestamp.desc()).all()
     return render_template('classify_list.html', posts=post)
+
+@main.route('/tag')
+def tag():
+    post = Tag.query.all()
+    return render_template('tag.html', posts=post)
+
+@main.route('/tag/<int:id>')
+def tag_list(id):
+    post = Tag.query.get_or_404(id).posts
+    return render_template('tag_list.html', posts=post)

@@ -5,6 +5,11 @@ from markdown import markdown
 import bleach
 from bs4 import BeautifulSoup as bs
 
+
+registrations = db.Table('registrations',
+                         db.Column('post_id', db.Integer, db.ForeignKey('posts.id')),
+                         db.Column('tag_id', db.Integer, db.ForeignKey('tags.id'))
+                         )
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
@@ -67,5 +72,16 @@ class Classify(db.Model):
 
     def __repr__(self):
         return "<CLASSIFY %r>"%self.classify
+
+class Tag(db.Model):
+    __tablename__ = 'tags'
+    id = db.Column(db.Integer, primary_key=True)
+    tag = db.Column(db.String(64), unique=True)
+    posts = db.relationship('Post',
+                            secondary=registrations,
+                            backref=db.backref('post_tag', lazy='dynamic'))
+    def __repr__(self):
+        return '<TAG %r>'%self.tag
+
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)

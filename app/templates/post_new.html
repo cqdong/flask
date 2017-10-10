@@ -9,22 +9,22 @@
 {% endblock %}
 
 {% block content %}
-{#    <h2 class="page-header">新的文章</h2>#}
     <main>
-    <div class="container">
-    <div class="post-new-main">
-    <form class="form" method="post" role="form">
-        {{ forms.hidden_tag() }}
-        {{ wtf.form_field(forms.title) }}
-        {{ wtf.form_field(forms.classify) }}
-        <div id="test-editormd" class="form-control">
-            {{ forms.body(class="form-control", style="display:none;") }}
+        <div class="container">
+            <div class="post-new-main">
+{#                <h2 class="page-header">新的文章</h2>#}
+                <form class="form" method="post" role="form">
+                    {{ forms.hidden_tag() }}
+                    {{ wtf.form_field(forms.title) }}
+                    {{ wtf.form_field(forms.classify) }}
+                    <div id="test-editormd" class="form-control">
+                        {{ forms.body(class="form-control", style="display:none;") }}
+                    </div>
+                    {{ wtf.form_field(forms.tag, class="form-control basic-multiple", multiple="multiple", style="width:100%") }}
+                    {{ forms.submit() }}
+                </form>
+            </div>
         </div>
-{#        {{ wtf.form_field(forms.tag, class="form-control basic-multiple", multiple="multiple", style="width:100%") }}#}
-        {{ forms.submit() }}
-    </form>
-    </div>
-    </div>
     </main>
 {% endblock %}
 

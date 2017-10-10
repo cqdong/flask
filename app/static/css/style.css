@@ -5,6 +5,13 @@ body {
     border-color: #CC3333;
 }
 
+.header-shadow {
+    box-shadow: 0 0 3px rgba(14,14,14,0.26);
+    /*padding-bottom: 5px;*/
+    /*position: fixed;*/
+    /*z-index: 1000;*/
+}
+
 .navbar {
     min-height: 80px;
     border-radius: 0px;
@@ -14,12 +21,17 @@ body {
     padding-top: 30px;
 }
 
+.nav>li>a:focus, .nav>li>a:hover{
+    background-color:#ffffff;
+}
+
 main {
     margin-top: -20px;
+    /*border: 1px solid;*/
 }
 
 .post-main {
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     margin-top: 0px;
     padding-left: 15%;
     padding-right: 15%;
@@ -27,8 +39,8 @@ main {
 }
 
 .post-new-main {
-    background-color: #ffffff;
-    padding-top: 50px;
+    /*background-color: #ffffff;*/
+    padding-top: 30px;
     padding-left: 8%;
     padding-right: 8%;
     padding-bottom: 20px;
