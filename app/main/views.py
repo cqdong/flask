@@ -19,7 +19,11 @@ def index():
 def post_new():
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(title=form.title.data, body=form.body.data,)
+        tag_list = []
+        for t in form.tag.data:
+            tag_list.append(Tag.query.get(t))
+        post = Post(title=form.title.data, body=form.body.data,post_classify=Classify.query.get(form.classify.data),
+                    post_tag=tag_list)
         db.session.add(post)
         return redirect(url_for('.index'))
     return render_template('post_new.html', forms=form)
