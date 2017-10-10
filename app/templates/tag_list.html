@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
 {% block page_content %}
-    <h2 class="page-header">Tag</h2>
+    <h2 class="page-header">{{ tags.tag }}</h2>
     {% for post in posts %}
-        <div>{{ post.title }}</div>
+        <div><a href="{{ url_for('main.post_detail', id=post.id) }}">{{ post.title }}</a></div>
     {% endfor %}
 {% endblock %}

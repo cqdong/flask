@@ -108,5 +108,6 @@ def tag():
 
 @main.route('/tag/<int:id>')
 def tag_list(id):
-    post = Tag.query.get_or_404(id).posts
-    return render_template('tag_list.html', posts=post)
+    tag = Tag.query.get_or_404(id)
+    post = tag.posts
+    return render_template('tag_list.html', posts=post, tags=tag)
