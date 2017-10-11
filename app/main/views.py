@@ -6,16 +6,18 @@ from ..models import Post, Classify, Tag
 from sqlalchemy import extract, func, desc
 from .forms import PostForm
 import os
+from flask_login import login_required, current_user
 
 @main.route('/')
 def index():
     page = request.args.get('page', 1, type=int)
-    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=5, error_out=False)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page, per_page=3, error_out=False)
     post = pagination.items
     # post = Post.query.order_by(Post.timestamp.desc())
     return render_template('index.html', posts=post, utctime=datetime.utcnow(), pagination=pagination)
 
 @main.route('/post_new', methods=['GET', 'POST'])
+@login_required
 def post_new():
     form = PostForm()
     if form.validate_on_submit():
@@ -35,6 +37,7 @@ def post_detail(id):
     return render_template('post_detail.html', posts=post)
 
 @main.route('/post_edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def post_edit(id):
     post = Post.query.get_or_404(id)
     form = PostForm()
@@ -61,6 +64,7 @@ def post_edit(id):
     return render_template('post_new.html', forms=form)
 
 @main.route('/upload/', methods=['POST'])
+@login_required
 def upload():
     file = request.files.get('editormd-image-file')
     if not file:

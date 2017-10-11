@@ -48,7 +48,6 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ url_for('main.archive') }}"><i class="iconfont icon-guidangicon" style="font-size: inherit"></i> 归档</a></li>
                         <li><a href="{{ url_for('main.classify') }}"><i class="iconfont icon-100" style="font-size: inherit"></i> 分类</a></li>
-                        <li><a href="{{ url_for('main.tag') }}"><i class="iconfont icon-discount" style="font-size: inherit"></i> 标签</a></li>
 {#                        <li><a href="{{ url_for('main.about_me') }}"><i class="iconfont icon-information" style="font-size: inherit"></i> 关于</a></li>#}
 
                         {% if current_user.is_authenticated %}
@@ -60,6 +59,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ url_for('auth.logout') }}"><i class="iconfont icon-tuichu" style="font-size: inherit"></i> 退出</a></li>
+                                    <li><a href="{{ url_for('main.tag') }}"><i class="iconfont icon-discount" style="font-size: inherit"></i> 标签</a></li>
 {#                                    <li><a href="{{ url_for('main.index') }}"><i class="iconfont icon-edit" style="font-size: inherit"></i> 留言</a></li>#}
 {#                                    <li><a href="{{ url_for('main.index') }}"><i class="iconfont icon-pic" style="font-size: inherit"></i> 相册</a></li>#}
                                     <li><a href="{{ url_for('main.post_new') }}"><i class="iconfont icon-xinjian" style="font-size: inherit"></i> 写博文</a></li>
@@ -67,8 +67,8 @@
 
                                 </ul>
                             </li>
-                        {% else %}
-                            <li><a href="{{ url_for('auth.login') }}"><i class="iconfont icon-icon" style="font-size: inherit"></i> 登陆</a></li>
+{#                        {% else %}#}
+{#                            <li><a href="{{ url_for('auth.login') }}"><i class="iconfont icon-icon" style="font-size: inherit"></i> 登陆</a></li>#}
                         {% endif %}
                     </ul>
                 </div>

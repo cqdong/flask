@@ -4,6 +4,12 @@
 {% block title %}用户登陆{% endblock %}
 
 {% block page_content %}
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning", style="margin-top: 10px;">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
     <h1 class="page-header">
         用户登陆
     </h1>
