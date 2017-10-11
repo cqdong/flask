@@ -14,3 +14,14 @@ def login():
             return redirect(request.args.get('next') or url_for('main.index'))
         flash('用户名或密码错误')
     return render_template('auth/login.html', forms=form)
+
+@auth.route('/logout')
+def logout():
+    logout_user()
+    flash('You have been logged out.')
+    return redirect(url_for('main.index'))
+
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated:
+        current_user.ping()
