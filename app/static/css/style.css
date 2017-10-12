@@ -1,3 +1,10 @@
+@media (min-width: 1200px){
+    .post-main{
+        padding-left: 15%;
+        padding-right: 15%;
+    }
+}
+
 body {
     font-family: 'Roboto Slab', 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
     border-top: solid;
@@ -17,6 +24,10 @@ body {
     border-radius: 0px;
 }
 
+.navbar-default{
+    background-color: #ffffff;
+}
+
 .navbar-header {
     padding-top: 30px;
 }
@@ -33,8 +44,8 @@ main {
 .post-main {
     /*background-color: #ffffff;*/
     margin-top: 0px;
-    padding-left: 15%;
-    padding-right: 15%;
+    /*padding-left: 15%;*/
+    /*padding-right: 15%;*/
     padding-bottom: 20px;
 }
 
